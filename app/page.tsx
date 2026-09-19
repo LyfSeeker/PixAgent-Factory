@@ -1,3 +1,3 @@
-import { PixAgentApp } from "../components/pixagent-app";
+import { Landing } from "../components/landing";
 
-export default function Home() { return <PixAgentApp />; }
+export default function Home() { return <Landing />; }
