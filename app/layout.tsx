@@ -5,6 +5,7 @@ import "./tasks.css";
 import "./pixel-ui.css";
 import "./palette.css";
 import "./landing.css";
+import "./factory-theme.css";
 
 export const metadata: Metadata = {
   title: "PixAgent Factory | AI Software Studio",

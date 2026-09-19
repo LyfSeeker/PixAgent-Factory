@@ -45,7 +45,7 @@ export function PixAgentApp() {
 
   return <main className={`app-shell ${active === "Studio" ? "studio-mode" : ""}`}>
     <aside className="rail">
-      <a className="brand" onClick={() => navigate("/workspace")}><span className="brand-mark">P</span><span>PIXAGENT</span></a>
+      <a className="brand" onClick={() => navigate("/workspace")}><span className="factory-sigil" aria-hidden="true"/><span className="factory-wordmark">PIXAGENT</span></a>
       <div className="nav-stack">{nav.map(item => <button key={item.label} onClick={() => navigate(item.href)} className={`nav-item ${active === item.label ? "active" : ""}`}><item.icon size={19}/><span>{item.label}</span></button>)}</div>
       <button className="nav-item rail-bottom" onClick={() => navigate("/settings")}><Settings size={19}/><span>Settings</span></button>
     </aside>
