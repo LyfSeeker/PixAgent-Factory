@@ -62,7 +62,7 @@ function ReferenceStudio({ agents, onSelect, onHire, onDemo, demoStep, notice, o
   const [catMood, setCatMood] = useState("Pet cat");
   return <div className="reference-studio">
     <section className="pixel-office">
-      <div className="pixel-titlebar"><span className="tiny-grid">▦</span><b>PIXAGENT FAACTORY</b><span>Northstar Studio</span><div><button onClick={onHire}>+ hire</button><button onClick={onDemo}>{demoStep ? "advance" : "demo"}</button></div></div>
+      <div className="pixel-titlebar"><span className="tiny-grid">▦</span><b>PIXAGENT FACTORY</b><span>Northstar Studio</span><div><button onClick={onHire}>+ hire</button><button onClick={onDemo}>{demoStep ? "advance" : "demo"}</button></div></div>
       <div className="office-room">
         <div className="office-window"><span className="building one"/><span className="building two"/><span className="building three"/><i/></div>
         <div className="bookcase"><i/><i/><i/><i/><i/><i/><i/><i/></div><div className="picture">✦</div><div className="clock">◷</div>

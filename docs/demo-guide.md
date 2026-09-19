@@ -16,4 +16,4 @@ Run `npm install && npm run dev`, then open the home route. The default studio i
 
 ## Audience takeaway
 
-PixAgent Faactory makes parallel AI coding work visible: who is working, what they own, why someone is waiting, where a blocker originates, and when a human needs to decide.
+PixAgent Factory makes parallel AI coding work visible: who is working, what they own, why someone is waiting, where a blocker originates, and when a human needs to decide.

@@ -7,7 +7,7 @@ import "./palette.css";
 import "./landing.css";
 
 export const metadata: Metadata = {
-  title: "PixAgent Faactory | AI Software Studio",
+  title: "PixAgent Factory | AI Software Studio",
   description: "A visual control center for AI software agents.",
 };
 
