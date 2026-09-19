@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./retro.css";
+import "./tasks.css";
 
 export const metadata: Metadata = {
   title: "PixAgent Faactory | AI Software Studio",
