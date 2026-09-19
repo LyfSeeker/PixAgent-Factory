@@ -12,7 +12,8 @@ PixAgent Factory turns a multi-agent software workflow into a developer-oriented
 - Agent capacity, skills, progress, work queues, and current assignment
 - Studio activity feed and a human-approval signal
 - Project pulse metrics and task-board / agents / activity / analytics navigation
-- A demo button that simulates a blocker and automatic recovery
+- A server-side factory ledger for agents, assignments, blockers, evidence, decisions, and run history
+- Scoped OpenAI task runner that keeps API credentials on the server
 - Responsive layouts for desktop and mobile
 
 ## Run locally
@@ -28,7 +29,8 @@ Open [http://localhost:3000](http://localhost:3000).
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Pixel office command center |
+| `/` | Pixel-themed product landing page |
+| `/workspace` | Pixel office command center |
 | `/agents` | Agent management view |
 | `/projects` | Project overview |
 | `/tasks` | Task board |
@@ -36,16 +38,21 @@ Open [http://localhost:3000](http://localhost:3000).
 | `/analytics` | Project metrics |
 | `/settings` | Workspace settings shell |
 
-## Demo story
+## API routes
 
-Start with the “Run demo project” button. It reflects the intended presentation sequence: agents work concurrently, QA is blocked by an API dependency, the dependency lands, QA resumes, and the system surfaces a final human decision.
+| Route | Purpose |
+| --- | --- |
+| `GET /api/factory` | Read agents and their task ownership |
+| `POST /api/factory` | Create a scoped task assignment |
+| `PATCH /api/factory/tasks/:id` | Update status, blocker, evidence, or decision |
+| `POST /api/agents/run` | Run a scoped task and save its report for review |
 
 ## Extending the MVP
 
-The UI uses an in-memory simulated execution layer intentionally. A production connection can replace the seed data and state handlers with:
+For a production deployment, replace the development in-memory factory store with:
 
 - Supabase tables and realtime streams for projects, tasks, agents and events
-- OpenAI Responses / Agents APIs for project decomposition and assignment logic
+- OpenAI Responses APIs for project decomposition and assignment logic
 - A coding-agent runner that reports sessions, artifacts and dependency state
 - Auth and role-based decision controls for team use
 
