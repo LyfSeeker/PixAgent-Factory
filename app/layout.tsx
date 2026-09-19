@@ -3,6 +3,7 @@ import "./globals.css";
 import "./retro.css";
 import "./tasks.css";
 import "./pixel-ui.css";
+import "./palette.css";
 
 export const metadata: Metadata = {
   title: "PixAgent Faactory | AI Software Studio",
