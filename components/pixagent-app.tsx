@@ -27,7 +27,7 @@ const statusMeta: Record<Status, { label: string; dot: string }> = {
 
 export function PixAgentApp() {
   const pathname = usePathname(); const router = useRouter();
-  const [agents, setAgents] = useState(seedAgents); const [selectedId, setSelectedId] = useState("maya");
+  const [agents, setAgents] = useState(seedAgents); const [selectedId, setSelectedId] = useState("");
   const [showHire, setShowHire] = useState(false); const [demoStep, setDemoStep] = useState(0); const [notice, setNotice] = useState("Review required");
   const selected = agents.find(a => a.id === selectedId) ?? agents[0];
   const active = nav.find(n => n.href === pathname)?.label ?? "Studio";
@@ -36,7 +36,7 @@ export function PixAgentApp() {
   const updateName = (name: string) => setAgents(old => old.map(a => a.id === selected.id ? { ...a, name } : a));
   const runDemo = () => { setDemoStep(s => (s + 1) % 4); setAgents(old => old.map(a => a.id === "sara" ? { ...a, status: demoStep === 1 ? "working" : "blocked", progress: demoStep === 1 ? 54 : a.progress } : a)); setNotice(demoStep === 1 ? "Sara resumed after API contract landed" : "Demo sequence is running"); };
 
-  return <main className="app-shell">
+  return <main className={`app-shell ${active === "Studio" ? "studio-mode" : ""}`}>
     <aside className="rail">
       <a className="brand" onClick={() => navigate("/")}><span className="brand-mark">P</span><span>PIXAGENT</span></a>
       <div className="nav-stack">{nav.map(item => <button key={item.label} onClick={() => navigate(item.href)} className={`nav-item ${active === item.label ? "active" : ""}`}><item.icon size={19}/><span>{item.label}</span></button>)}</div>
@@ -44,11 +44,30 @@ export function PixAgentApp() {
     </aside>
     <section className="workspace">
       <header className="topbar"><div className="crumb"><span className="pulse-dot"/> <span>Northstar workspace</span><ChevronRight size={15}/><strong>{active}</strong></div><div className="top-actions"><button className="icon-button"><CircleHelp size={18}/></button><button className="notification"><Bell size={18}/><i/></button><div className="user-avatar">LK</div></div></header>
-      {active === "Studio" ? <Studio agents={agents} selected={selected} onSelect={setSelectedId} onHire={() => setShowHire(true)} onDemo={runDemo} demoStep={demoStep} metrics={metrics} notice={notice} onNavigate={navigate}/> : <DashboardView title={active} agents={agents} metrics={metrics} onSelect={setSelectedId} onNavigate={navigate}/>} 
+      {active === "Studio" ? <ReferenceStudio agents={agents} onSelect={setSelectedId} onHire={() => setShowHire(true)} onDemo={runDemo} demoStep={demoStep} notice={notice} onNavigate={navigate}/> : <DashboardView title={active} agents={agents} metrics={metrics} onSelect={setSelectedId} onNavigate={navigate}/>} 
     </section>
-    {active === "Studio" && <AgentDrawer agent={selected} onClose={() => setSelectedId("")} onName={updateName} notice={notice}/>} 
+    {active === "Studio" && selectedId && <AgentDrawer agent={selected} onClose={() => setSelectedId("")} onName={updateName} notice={notice}/>} 
     {showHire && <HireModal onClose={() => setShowHire(false)} onHire={(agent) => { setAgents(a => [...a, agent]); setSelectedId(agent.id); setShowHire(false); }}/>} 
   </main>;
+}
+
+function ReferenceStudio({ agents, onSelect, onHire, onDemo, demoStep, notice, onNavigate }: { agents: Agent[]; onSelect: (id: string) => void; onHire: () => void; onDemo: () => void; demoStep: number; notice: string; onNavigate: (url:string) => void }) {
+  return <div className="reference-studio">
+    <section className="pixel-office">
+      <div className="pixel-titlebar"><span className="tiny-grid">▦</span><b>PIXAGENT FAACTORY</b><span>Northstar Studio</span><div><button onClick={onHire}>+ hire</button><button onClick={onDemo}>{demoStep ? "advance" : "demo"}</button></div></div>
+      <div className="office-room">
+        <div className="office-window"><span className="building one"/><span className="building two"/><span className="building three"/><i/></div>
+        <div className="bookcase"><i/><i/><i/><i/><i/><i/><i/><i/></div><div className="picture">✦</div><div className="clock">◷</div>
+        <div className="retro-board"><b>SPRINT 04</b><span>ship the student events flow</span><i/><i/><i/><i/></div><div className="hanging-shelf"><i/><i/><i/><i/></div><div className="filing-cabinet"><i/><i/><i/><i/></div>
+        <div className="office-plant plant-left">♣</div><div className="office-plant plant-top">♣</div><div className="office-plant plant-right">♣</div><div className="office-plant plant-bottom">♣</div>
+        <div className="office-rug rug-blue"/><div className="office-rug rug-green"/><div className="office-rug rug-rose"/><div className="sleepy-cat">⌁</div><div className="coffee-station">☕<i/><i/></div>
+        {agents.map(agent => <button className={`retro-desk ${agent.spot}`} key={agent.id} onClick={() => onSelect(agent.id)} aria-label={`Open ${agent.name}'s profile`}><div className="retro-monitor"><i/><span/></div><div className="retro-lamp"/><div className="retro-mug">☕</div><div className="retro-keyboard"/><div className="retro-person" style={{ "--agent-hair": agent.color } as React.CSSProperties}><i className="pixel-head"/><i className="pixel-body"/></div>{agent.status === "blocked" && <b className="pixel-callout danger">!</b>}{agent.status === "approval" && <b className="pixel-callout approval">…</b>}{agent.status === "complete" && <b className="pixel-callout success">✓</b>}<span className="pixel-name">{agent.name.split(" ")[0]}<em className={statusMeta[agent.status].dot}/></span></button>)}
+        <button className="walkabout" onClick={() => onNavigate("/projects")}><div className="walker"><i/><i/></div><b>You</b></button>
+      </div>
+      <footer className="pixel-footer"><span>▣ inbox <b>1</b></span><strong>Company Studio</strong><span>● all systems synced</span></footer>
+    </section>
+    <aside className="coworker-panel"><div className="panel-chrome"><Users size={19}/><span/><i/><i/><b>▣</b></div><div className="cream-panel"><p className="cream-eyebrow">YOUR COWORKERS</p><div className="roster-title"><h1>Everyone</h1><b>{agents.length}</b></div><div className="roster-tabs"><button className="selected">All</button><button>In office</button><button>Remote</button></div><div className="roster-list">{agents.map(agent => <button className="roster-agent" key={agent.id} onClick={() => onSelect(agent.id)}><div className="roster-avatar" style={{background:agent.color}}><span>{agent.name.split(" ").map(x=>x[0]).join("")}</span></div><div><b>{agent.name}</b><p>{agent.status === "idle" ? "Available for assignment" : agent.task}</p><small><i className={statusMeta[agent.status].dot}/> In office · {statusMeta[agent.status].label}</small></div><ChevronRight size={17}/></button>)}</div><button className="roster-hire" onClick={onHire}><Plus size={15}/> Add coworker</button></div><div className="pixel-notice">{notice}</div></aside>
+  </div>;
 }
 
 function Studio({ agents, selected, onSelect, onHire, onDemo, demoStep, metrics, notice, onNavigate }: { agents: Agent[]; selected: Agent; onSelect: (id: string) => void; onHire: () => void; onDemo: () => void; demoStep: number; metrics: {done:number;work:number;blockers:number}; notice:string; onNavigate:(url:string)=>void }) {
