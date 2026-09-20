@@ -50,7 +50,7 @@ Not deployed yet. Run locally using the instructions below.
 
 ### Demo / Pitch Video
 
-Add the demo or pitch video link here before submission.
+[Watch the demo video](https://drive.google.com/drive/folders/1r3SSdV47Z_0F9yJ4s7NRfIEUgbRaU_uX?usp=sharing)
 
 Suggested demo flow:
 
