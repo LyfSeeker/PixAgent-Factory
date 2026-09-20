@@ -37,7 +37,7 @@ export function PixAgentApp() {
   const pathname = usePathname(); const router = useRouter();
   const [agents, setAgents] = useState(seedAgents); const [selectedId, setSelectedId] = useState("");
   const [showHire, setShowHire] = useState(false); const [showSchedule, setShowSchedule] = useState(false); const [demoStep, setDemoStep] = useState(0); const [notice, setNotice] = useState("Review required");
-  const [now, setNow] = useState<Date | null>(null); const [scheduledTasks, setScheduledTasks] = useState<ScheduledTask[]>([]);
+  const [now, setNow] = useState<Date>(() => new Date()); const [scheduledTasks, setScheduledTasks] = useState<ScheduledTask[]>([]);
   const selected = agents.find(a => a.id === selectedId) ?? agents[0];
   const active = nav.find(n => n.href === pathname)?.label ?? "Studio";
   const metrics = useMemo(() => ({ done: agents.filter(a => a.status === "complete").length + 8, work: agents.filter(a => a.status === "working").length + 2, blockers: agents.filter(a => a.status === "blocked").length }), [agents]);
@@ -79,7 +79,7 @@ export function PixAgentApp() {
   </main>;
 }
 
-function ReferenceStudio({ agents, now, nextSchedule, onSelect, onHire, onSchedule, onDemo, demoStep, notice, onNavigate }: { agents: Agent[]; now: Date | null; nextSchedule?: ScheduledTask; onSelect: (id: string) => void; onHire: () => void; onSchedule: () => void; onDemo: () => void; demoStep: number; notice: string; onNavigate: (url:string) => void }) {
+function ReferenceStudio({ agents, now, nextSchedule, onSelect, onHire, onSchedule, onDemo, demoStep, notice, onNavigate }: { agents: Agent[]; now: Date; nextSchedule?: ScheduledTask; onSelect: (id: string) => void; onHire: () => void; onSchedule: () => void; onDemo: () => void; demoStep: number; notice: string; onNavigate: (url:string) => void }) {
   const [catMood, setCatMood] = useState("Pet cat");
   const [roamStep, setRoamStep] = useState(-1);
   useEffect(() => { const firstWalk = window.setTimeout(() => setRoamStep(0), 4200); const loop = window.setInterval(() => setRoamStep(step => step + 1), 8200); return () => { window.clearTimeout(firstWalk); window.clearInterval(loop); }; }, []);
@@ -89,7 +89,7 @@ function ReferenceStudio({ agents, now, nextSchedule, onSelect, onHire, onSchedu
       <div className="pixel-titlebar"><span className="tiny-grid">▦</span><b>PIXAGENT FACTORY</b><span>Northstar Studio</span><div><button onClick={onHire}>+ hire</button><button onClick={onDemo}>{demoStep ? "advance" : "demo"}</button></div></div>
       <div className="office-room">
         <div className="office-window"><span className="building one"/><span className="building two"/><span className="building three"/><i/></div>
-        <div className="live-clock" aria-label={now ? `Current local time ${now.toLocaleTimeString()}` : "Loading local time"}><span>STUDIO TIME · LOCAL</span><b>{now ? now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" }) : "--:--:--"}</b><time>{now ? now.toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" }) : "SYNCING CLOCK"}</time><small>{nextSchedule ? `NEXT · ${new Date(nextSchedule.dueAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}` : "NO JOBS SCHEDULED"}</small></div>
+        <div className="live-clock" suppressHydrationWarning aria-label={`Current local time ${now.toLocaleTimeString()}`}><span>LIVE LOCAL TIME</span><b suppressHydrationWarning>{now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}</b><time suppressHydrationWarning>{now.toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" })}</time><small>{nextSchedule ? `NEXT · ${new Date(nextSchedule.dueAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}` : "NO JOBS SCHEDULED"}</small></div>
         <div className="bookcase"><i/><i/><i/><i/><i/><i/><i/><i/></div><div className="picture">✦</div><div className="clock">◷</div>
         <div className="retro-board"><b>SPRINT 04</b><span>ship the student events flow</span><i/><i/><i/><i/></div><div className="hanging-shelf"><i/><i/><i/><i/></div><div className="filing-cabinet"><i/><i/><i/><i/></div>
         <div className="office-plant plant-left">♣</div><div className="office-plant plant-top">♣</div><div className="office-plant plant-right">♣</div><div className="office-plant plant-bottom">♣</div>

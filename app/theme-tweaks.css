@@ -17,8 +17,8 @@
 }
 
 /* Live studio details: motion remains intentionally subtle so task ownership stays readable. */
-.studio-mode .live-clock{position:absolute;z-index:10;top:3%;right:3%;display:grid;gap:3px;min-width:138px;padding:8px 10px;background:#17181ef2;border:2px solid #dfbd78;box-shadow:3px 3px 0 #40281b;color:#f4e4bf;font-family:"Courier New",monospace;text-align:center;pointer-events:none}
-.studio-mode .live-clock span{font-size:7px;letter-spacing:.13em;color:#c7aa70}.studio-mode .live-clock b{font-size:16px;letter-spacing:.07em;line-height:1}.studio-mode .live-clock time{font-size:7px;letter-spacing:.1em;color:#e5cf9b}.studio-mode .live-clock small{font-size:7px;color:#aebf8a;white-space:nowrap}
+.studio-mode .live-clock{position:absolute;z-index:12;top:4%;right:4%;display:grid;gap:4px;min-width:166px;padding:10px 12px;background:#17181ef7;border:2px solid #dfbd78;box-shadow:4px 4px 0 #40281b;color:#f4e4bf;font-family:"Courier New",monospace;text-align:center;pointer-events:none}
+.studio-mode .live-clock span{font-size:8px;letter-spacing:.15em;color:#c7aa70}.studio-mode .live-clock b{font-size:19px;letter-spacing:.08em;line-height:1}.studio-mode .live-clock time{font-size:8px;letter-spacing:.12em;color:#e5cf9b}.studio-mode .live-clock small{font-size:7px;color:#aebf8a;white-space:nowrap}
 .studio-mode .worker-sprite{will-change:transform;scale:var(--sprite-x,1) 1;animation:worker-idle 3.8s steps(2,end) var(--motion-delay,0s) infinite}
 .studio-mode .worker-sprite.facing-left{--sprite-x:-1}
 .studio-mode .worker-sprite.worker-working{animation-name:worker-working}.studio-mode .worker-sprite.worker-waiting{animation-name:worker-walkabout;animation-duration:6.5s}.studio-mode .worker-sprite.worker-approval{animation-name:worker-review;animation-duration:2.5s}.studio-mode .worker-sprite.worker-blocked{animation-name:worker-blocked;animation-duration:1.3s}.studio-mode .worker-sprite.worker-complete{animation-name:worker-complete;animation-duration:4.4s}
