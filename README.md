@@ -2,7 +2,7 @@
 
 ## Overview
 
-PixAgent Factory is a visual command center for coordinating AI coding agents. It turns a collection of agent tasks into a small pixel-art software studio where each coworker has a role, scoped capabilities, current assignment, progress, queue, and decision status.
+PixAgent Factory is a visual command center for coordinating AI coding agents. It turns a collection of agent tasks into a pixel-art software studio where each coworker has a role, scoped capabilities, current assignment, progress, queue, and decision status.
 
 The project combines an interactive pixel office with practical project controls so teams can understand what each agent is doing without losing track of blockers, evidence, or human approvals.
 
@@ -33,7 +33,7 @@ PixAgent Factory gives every coworker a distinct role, skills, tools, and task. 
 - **Backend:** Next.js Route Handlers
 - **Database:** In-memory development store for the hackathon MVP
 - **APIs / Services:** Optional OpenAI API integration for scoped agent runs
-- **Hosting / Deployment:** Not deployed yet
+- **Hosting / Deployment:** Vercel
 - **Other Tools:** Lucide React icons, GitHub, Git
 
 ## Codex / OpenAI Usage
@@ -46,11 +46,11 @@ The project also includes an optional OpenAI-powered server route for running a 
 
 ### Live Demo
 
-Not deployed yet. Run locally using the instructions below.
+[Open PixAgent Factory](https://pixagentfactory.vercel.app/)
 
 ### Demo / Pitch Video
 
-[Watch the demo video](https://drive.google.com/drive/folders/1r3SSdV47Z_0F9yJ4s7NRfIEUgbRaU_uX?usp=sharing)
+[Watch the demo and pitch video](https://drive.google.com/drive/folders/1r3SSdV47Z_0F9yJ4s7NRfIEUgbRaU_uX?usp=sharing)
 
 Suggested demo flow:
 

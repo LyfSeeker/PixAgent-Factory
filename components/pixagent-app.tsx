@@ -82,8 +82,9 @@ export function PixAgentApp() {
 function ReferenceStudio({ agents, now, nextSchedule, onSelect, onHire, onSchedule, onDemo, demoStep, notice, onNavigate }: { agents: Agent[]; now: Date; nextSchedule?: ScheduledTask; onSelect: (id: string) => void; onHire: () => void; onSchedule: () => void; onDemo: () => void; demoStep: number; notice: string; onNavigate: (url:string) => void }) {
   const [catMood, setCatMood] = useState("Pet cat");
   const [roamStep, setRoamStep] = useState(-1);
-  useEffect(() => { const firstWalk = window.setTimeout(() => setRoamStep(0), 4200); const loop = window.setInterval(() => setRoamStep(step => step + 1), 8200); return () => { window.clearTimeout(firstWalk); window.clearInterval(loop); }; }, []);
-  const roamer = roamStep >= 0 ? agents[roamStep % agents.length] : undefined;
+  useEffect(() => { const firstWalk = window.setTimeout(() => setRoamStep(0), 4200); const loop = window.setInterval(() => setRoamStep(step => step + 1), 9000); return () => { window.clearTimeout(firstWalk); window.clearInterval(loop); }; }, []);
+  const roamerIndex = roamStep >= 0 ? roamStep % agents.length : -1;
+  const roamer = roamerIndex >= 0 ? agents[roamerIndex] : undefined;
   return <div className="reference-studio">
     <section className="pixel-office">
       <div className="pixel-titlebar"><span className="tiny-grid">▦</span><b>PIXAGENT FACTORY</b><span>Northstar Studio</span><div><button onClick={onHire}>+ hire</button><button onClick={onDemo}>{demoStep ? "advance" : "demo"}</button></div></div>
@@ -94,8 +95,8 @@ function ReferenceStudio({ agents, now, nextSchedule, onSelect, onHire, onSchedu
         <div className="retro-board"><b>SPRINT 04</b><span>ship the student events flow</span><i/><i/><i/><i/></div><div className="hanging-shelf"><i/><i/><i/><i/></div><div className="filing-cabinet"><i/><i/><i/><i/></div>
         <div className="office-plant plant-left">♣</div><div className="office-plant plant-top">♣</div><div className="office-plant plant-right">♣</div><div className="office-plant plant-bottom">♣</div>
         <div className="office-rug rug-blue"/><div className="office-rug rug-green"/><div className="office-rug rug-rose"/><div className="sleepy-cat">⌁</div><div className="coffee-station">☕<i/><i/></div>
-        {agents.map((agent, index) => <button className={`retro-desk ${agent.spot}`} key={agent.id} onClick={() => onSelect(agent.id)} aria-label={`Open ${agent.name}'s profile`}><div className="retro-monitor"><i/><span/></div><div className="retro-lamp"/><div className="retro-mug">☕</div><div className="retro-keyboard"/><span className={`seated-sprite worker-${index % 5}`} aria-hidden="true"/></button>)}
-        {roamer && <div className={`office-roamer route-${roamStep % 3}`} key={`walk-${roamStep}`} aria-label={`${roamer.name} is walking through the office`} style={{ "--roamer-hair": roamer.color } as React.CSSProperties}><i/><b/></div>}
+        {agents.map((agent, index) => <button className={`retro-desk ${agent.spot} ${index === roamerIndex ? "worker-away" : ""}`} key={agent.id} onClick={() => onSelect(agent.id)} aria-label={`Open ${agent.name}'s profile`}><div className="retro-monitor"><i/><span/></div><div className="retro-lamp"/><div className="retro-mug">☕</div><div className="retro-keyboard"/><span className={`seated-sprite worker-${index % 5}`} aria-hidden="true"/></button>)}
+        {roamer && <div className={`office-roamer route-${roamerIndex} worker-${roamerIndex}`} key={`walk-${roamStep}`} aria-label={`${roamer.name} is walking through the office and returning to their desk`} style={{ "--roamer-hair": roamer.color } as React.CSSProperties}><i/><b/></div>}
         <button className="cat-action" onClick={() => setCatMood(catMood === "Purring!" ? "Feed cat" : "Purring!")}><span>🐾</span>{catMood}</button>
       </div>
       <footer className="pixel-footer"><span>▣ inbox <b>1</b></span><strong>Company Studio</strong><span>● all systems synced</span></footer>

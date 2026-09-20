@@ -35,16 +35,19 @@
 @media(max-width:860px){.studio-mode .live-clock{top:4%;right:3%;transform:scale(.8);transform-origin:top right}.studio-mode .worker-sprite{scale:calc(.72 * var(--sprite-x,1)) .72}.studio-mode .roster-actions{gap:5px;margin-top:8px}.studio-mode .roster-schedule{font-size:8px;padding:7px 3px}}
 @media(prefers-reduced-motion:reduce){.studio-mode .worker-sprite{animation:none}}
 
-/* Seated people stay still; a single coworker crosses the office at intervals. */
-.studio-mode .worker-sprite{animation:none!important}
-.studio-mode .office-roamer{position:absolute;z-index:8;width:28px;height:50px;pointer-events:none;filter:drop-shadow(2px 3px 0 #2a1a14)}
+/* One coworker at a time leaves their own desk, visits the shared floor, then returns. */
+.studio-mode .worker-sprite{animation:none!important}.studio-mode .worker-away .seated-sprite{opacity:0}
+.studio-mode .office-roamer{position:absolute;z-index:10;width:28px;height:50px;pointer-events:none;filter:drop-shadow(2px 3px 0 #2a1a14);will-change:transform,opacity}
 .studio-mode .office-roamer i{position:absolute;left:5px;top:0;width:20px;height:22px;background:#e8a270;border:5px solid var(--roamer-hair);border-bottom:2px solid var(--roamer-hair);box-shadow:2px 2px 0 #281b17}
-.studio-mode .office-roamer b{position:absolute;left:4px;bottom:0;width:22px;height:27px;background:#344c70;box-shadow:-3px 6px 0 -1px #20262e,3px 6px 0 -1px #20262e}
-.studio-mode .office-roamer.route-0{left:27%;top:51%;animation:walk-to-window 4.2s steps(10,end) both}.studio-mode .office-roamer.route-1{right:27%;top:47%;animation:walk-to-coffee 4.2s steps(10,end) both}.studio-mode .office-roamer.route-2{left:48%;bottom:19%;animation:walk-to-cat 4.2s steps(10,end) both}
-@keyframes walk-to-window{0%{opacity:0;transform:translate(0,0) scaleX(1)}10%,78%{opacity:1}100%{opacity:0;transform:translate(76px,-54px) scaleX(1)}}
-@keyframes walk-to-coffee{0%{opacity:0;transform:translate(0,0) scaleX(-1)}10%,78%{opacity:1}100%{opacity:0;transform:translate(-92px,66px) scaleX(-1)}}
-@keyframes walk-to-cat{0%{opacity:0;transform:translate(0,0) scaleX(1)}10%,78%{opacity:1}100%{opacity:0;transform:translate(102px,-44px) scaleX(1)}}
-@media(max-width:860px){.studio-mode .office-roamer{scale:.78}.studio-mode .office-roamer.route-0{left:25%;top:49%}.studio-mode .office-roamer.route-1{right:22%;top:48%}.studio-mode .office-roamer.route-2{left:45%;bottom:19%}}
+.studio-mode .office-roamer b{position:absolute;left:4px;bottom:0;width:22px;height:27px;background:var(--roamer-shirt,#344c70);box-shadow:-3px 6px 0 -1px #20262e,3px 6px 0 -1px #20262e}
+.studio-mode .office-roamer.worker-0{--roamer-shirt:#a94742}.studio-mode .office-roamer.worker-1{--roamer-shirt:#3d774e}.studio-mode .office-roamer.worker-2{--roamer-shirt:#356b9a}.studio-mode .office-roamer.worker-3{--roamer-shirt:#6b416e}.studio-mode .office-roamer.worker-4{--roamer-shirt:#c8682e}
+.studio-mode .office-roamer.route-0{left:9%;top:39%;animation:commute-0 5.6s steps(18,end) both}.studio-mode .office-roamer.route-1{left:50%;top:51%;animation:commute-1 5.6s steps(18,end) both}.studio-mode .office-roamer.route-2{right:5%;top:39%;animation:commute-2 5.6s steps(18,end) both}.studio-mode .office-roamer.route-3{left:9%;bottom:20%;animation:commute-3 5.6s steps(18,end) both}.studio-mode .office-roamer.route-4{right:5%;bottom:20%;animation:commute-4 5.6s steps(18,end) both}
+@keyframes commute-0{0%{opacity:0;transform:translate(0,0) scaleX(1)}6%{opacity:1}44%,56%{transform:translate(220px,54px) scaleX(1)}94%{opacity:1}100%{opacity:0;transform:translate(0,0) scaleX(-1)}}
+@keyframes commute-1{0%{opacity:0;transform:translate(0,0) scaleX(-1)}6%{opacity:1}44%,56%{transform:translate(-66px,-160px) scaleX(-1)}94%{opacity:1}100%{opacity:0;transform:translate(0,0) scaleX(1)}}
+@keyframes commute-2{0%{opacity:0;transform:translate(0,0) scaleX(-1)}6%{opacity:1}44%,56%{transform:translate(-202px,65px) scaleX(-1)}94%{opacity:1}100%{opacity:0;transform:translate(0,0) scaleX(1)}}
+@keyframes commute-3{0%{opacity:0;transform:translate(0,0) scaleX(1)}6%{opacity:1}44%,56%{transform:translate(220px,-74px) scaleX(1)}94%{opacity:1}100%{opacity:0;transform:translate(0,0) scaleX(-1)}}
+@keyframes commute-4{0%{opacity:0;transform:translate(0,0) scaleX(-1)}6%{opacity:1}44%,56%{transform:translate(-205px,-70px) scaleX(-1)}94%{opacity:1}100%{opacity:0;transform:translate(0,0) scaleX(1)}}
+@media(max-width:860px){.studio-mode .office-roamer{scale:.72;transform-origin:bottom center}.studio-mode .office-roamer.route-0{left:7%;top:39%}.studio-mode .office-roamer.route-1{left:49%;top:51%}.studio-mode .office-roamer.route-2{right:3%;top:39%}.studio-mode .office-roamer.route-3{left:7%;bottom:19%}.studio-mode .office-roamer.route-4{right:3%;bottom:19%}}
 
 /* Seat workers on the background office furniture instead of drawing a second desk/chair. */
 .studio-mode .pixel-office{background-image:url("/pixagent-office-studio.png")}
