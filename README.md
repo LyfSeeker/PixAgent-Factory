@@ -1,6 +1,6 @@
-# PIXAGENT FACTORY 🏭
+# PIXAGENT FACTORY 
 
-**Your AI Software Studio** — a hackathon MVP for observing, managing, and collaborating with a team of AI coding agents.
+**Your AI Software Studio** - a hackathon MVP for observing, managing, and collaborating with a team of AI coding agents.
 
 PixAgent Factory turns a multi-agent software workflow into a developer-oriented visual control center. A warm, original pixel-office scene makes agent status instantly legible, while the surrounding interface provides the serious project, task, and activity controls a software team needs.
 
