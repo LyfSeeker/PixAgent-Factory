@@ -1,0 +1,60 @@
+/* Final visual tuning for the shared brand and landing studio frame. */
+.factory-wordmark{letter-spacing:.09em}
+.hero-world .office-scene{height:auto;min-height:0;background-position:center 88%;background-size:auto 200%}
+.hero-world .office-scene:before,.hero-world .office-scene:after{content:none}
+@media(max-width:600px){.hero-world .office-scene{background-position:center 88%;background-size:auto 200%}}
+
+/* Keep the secondary landing action intact when the desktop hero is narrow. */
+.text-link{flex:0 0 auto;white-space:nowrap}
+@media(max-width:1400px){
+  .hero-actions{flex-direction:column;align-items:flex-start;gap:18px}
+}
+@media(max-width:1080px){
+  .landing-hero{grid-template-columns:1fr}
+  .hero-copy{border-right:0}
+  .hero-world{min-height:480px;border-top:1px solid #38342e}
+  .office-frame{max-width:780px}
+}
+
+/* Live studio details: motion remains intentionally subtle so task ownership stays readable. */
+.studio-mode .live-clock{position:absolute;z-index:10;top:3%;right:3%;display:grid;gap:3px;min-width:138px;padding:8px 10px;background:#17181ef2;border:2px solid #dfbd78;box-shadow:3px 3px 0 #40281b;color:#f4e4bf;font-family:"Courier New",monospace;text-align:center;pointer-events:none}
+.studio-mode .live-clock span{font-size:7px;letter-spacing:.13em;color:#c7aa70}.studio-mode .live-clock b{font-size:16px;letter-spacing:.07em;line-height:1}.studio-mode .live-clock time{font-size:7px;letter-spacing:.1em;color:#e5cf9b}.studio-mode .live-clock small{font-size:7px;color:#aebf8a;white-space:nowrap}
+.studio-mode .worker-sprite{will-change:transform;scale:var(--sprite-x,1) 1;animation:worker-idle 3.8s steps(2,end) var(--motion-delay,0s) infinite}
+.studio-mode .worker-sprite.facing-left{--sprite-x:-1}
+.studio-mode .worker-sprite.worker-working{animation-name:worker-working}.studio-mode .worker-sprite.worker-waiting{animation-name:worker-walkabout;animation-duration:6.5s}.studio-mode .worker-sprite.worker-approval{animation-name:worker-review;animation-duration:2.5s}.studio-mode .worker-sprite.worker-blocked{animation-name:worker-blocked;animation-duration:1.3s}.studio-mode .worker-sprite.worker-complete{animation-name:worker-complete;animation-duration:4.4s}
+@keyframes worker-idle{0%,100%{transform:translate(0,0)}50%{transform:translate(1px,-2px)}}
+@keyframes worker-working{0%,100%{transform:translate(0,0)}25%{transform:translate(-2px,-1px)}55%{transform:translate(2px,0)}78%{transform:translate(1px,-2px)}}
+@keyframes worker-walkabout{0%,25%,100%{transform:translate(0,0)}43%{transform:translate(10px,-4px)}66%{transform:translate(4px,-2px)}}
+@keyframes worker-review{0%,100%{transform:translate(0,0)}50%{transform:translate(0,-4px)}}
+@keyframes worker-blocked{0%,100%{transform:translate(0,0)}50%{transform:translate(-2px,0)}}
+@keyframes worker-complete{0%,100%{transform:translate(0,0)}45%{transform:translate(1px,-3px)}55%{transform:translate(-1px,-3px)}}
+.studio-mode .roster-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px}.studio-mode .roster-actions .roster-hire{margin:0}.studio-mode .roster-schedule{border:2px solid #7a674e;background:#2e2922;color:#f2dbad;padding:9px 6px;font:800 9px "Courier New",monospace;box-shadow:2px 2px 0 #1c1814}.studio-mode .roster-schedule:hover{background:#4b3d2d;transform:translate(-1px,-1px);box-shadow:3px 3px 0 #1c1814}.studio-mode .schedule-modal{width:min(410px,calc(100vw - 32px))}.studio-mode .schedule-modal .modal-icon{font:400 25px Georgia,serif}.studio-mode .schedule-modal label{font-family:"Courier New",monospace}.studio-mode .schedule-modal input[type="datetime-local"]{color-scheme:dark}
+
+/* Reference-inspired cream console: it belongs to the same warm studio as the office. */
+.studio-mode .coworker-panel{background:#252a34;border-color:#414855;box-shadow:0 0 0 7px #16171d,0 14px 24px #0008}.studio-mode .panel-chrome{background:#252a34;color:#d7dbe0}.studio-mode .cream-panel{background:#eee5d3;border-color:#c9bda7;box-shadow:inset 3px 3px #fff7e7,inset -3px -3px #ad9f84;color:#554b3f}.studio-mode .cream-eyebrow{color:#928773}.studio-mode .roster-title{border-color:#d1c4ad}.studio-mode .roster-title h1{color:#51473b}.studio-mode .roster-title b{background:#c8d5ba;color:#64715d}.studio-mode .roster-tabs button{border-color:#c9bea8;background:#e7dece;color:#786e5f}.studio-mode .roster-tabs .selected{background:#c1d0b6;border-color:#93a885;color:#586751}.studio-mode .roster-agent{border-color:#d0c3ad;background:#f6eedf;color:#554a3e;box-shadow:2px 2px 0 #c0b398}.studio-mode .roster-agent:hover{border-color:#9cac84;background:#fff7e9}.studio-mode .roster-agent p{color:#857a69}.studio-mode .roster-agent small{color:#718069}.studio-mode .roster-avatar{background-color:#e8d8bd!important;border-color:#dfceb2}.studio-mode .roster-hire{background:#c2d0b4;border-color:#98aa84;color:#536249}.studio-mode .roster-schedule{border-color:#8a7658;background:#554636;color:#fae9c4}
+@media(max-width:860px){.studio-mode .live-clock{top:4%;right:3%;transform:scale(.8);transform-origin:top right}.studio-mode .worker-sprite{scale:calc(.72 * var(--sprite-x,1)) .72}.studio-mode .roster-actions{gap:5px;margin-top:8px}.studio-mode .roster-schedule{font-size:8px;padding:7px 3px}}
+@media(prefers-reduced-motion:reduce){.studio-mode .worker-sprite{animation:none}}
+
+/* Seated people stay still; a single coworker crosses the office at intervals. */
+.studio-mode .worker-sprite{animation:none!important}
+.studio-mode .office-roamer{position:absolute;z-index:8;width:28px;height:50px;pointer-events:none;filter:drop-shadow(2px 3px 0 #2a1a14)}
+.studio-mode .office-roamer i{position:absolute;left:5px;top:0;width:20px;height:22px;background:#e8a270;border:5px solid var(--roamer-hair);border-bottom:2px solid var(--roamer-hair);box-shadow:2px 2px 0 #281b17}
+.studio-mode .office-roamer b{position:absolute;left:4px;bottom:0;width:22px;height:27px;background:#344c70;box-shadow:-3px 6px 0 -1px #20262e,3px 6px 0 -1px #20262e}
+.studio-mode .office-roamer.route-0{left:27%;top:51%;animation:walk-to-window 4.2s steps(10,end) both}.studio-mode .office-roamer.route-1{right:27%;top:47%;animation:walk-to-coffee 4.2s steps(10,end) both}.studio-mode .office-roamer.route-2{left:48%;bottom:19%;animation:walk-to-cat 4.2s steps(10,end) both}
+@keyframes walk-to-window{0%{opacity:0;transform:translate(0,0) scaleX(1)}10%,78%{opacity:1}100%{opacity:0;transform:translate(76px,-54px) scaleX(1)}}
+@keyframes walk-to-coffee{0%{opacity:0;transform:translate(0,0) scaleX(-1)}10%,78%{opacity:1}100%{opacity:0;transform:translate(-92px,66px) scaleX(-1)}}
+@keyframes walk-to-cat{0%{opacity:0;transform:translate(0,0) scaleX(1)}10%,78%{opacity:1}100%{opacity:0;transform:translate(102px,-44px) scaleX(1)}}
+@media(max-width:860px){.studio-mode .office-roamer{scale:.78}.studio-mode .office-roamer.route-0{left:25%;top:49%}.studio-mode .office-roamer.route-1{right:22%;top:48%}.studio-mode .office-roamer.route-2{left:45%;bottom:19%}}
+
+/* Seat workers on the background office furniture instead of drawing a second desk/chair. */
+.studio-mode .pixel-office{background-image:url("/pixagent-office-studio.png")}
+.studio-mode .seated-sprite{position:absolute;z-index:6;bottom:-29px;width:78px;height:128px;background:url("/pixel-seated-workers.png") no-repeat;background-size:500% 100%;image-rendering:pixelated;filter:drop-shadow(2px 3px 0 #241812)}
+.studio-mode .seated-sprite.worker-0{left:-20px;background-position:0 0}.studio-mode .seated-sprite.worker-1{left:-20px;background-position:25% 0;transform:scaleX(-1)}.studio-mode .seated-sprite.worker-2{left:3px;background-position:50% 0}.studio-mode .seated-sprite.worker-3{left:-20px;background-position:75% 0}.studio-mode .seated-sprite.worker-4{left:3px;background-position:100% 0}
+.studio-mode .chair-worker{position:absolute;z-index:6;left:17px;bottom:10px;width:27px;height:48px;display:block;filter:drop-shadow(1px 2px 0 #241812);transform-origin:bottom center}
+.studio-mode .chair-worker i{position:absolute;left:5px;top:0;width:18px;height:20px;background:#e7a270;border:5px solid var(--chair-hair,#4b2e22);border-bottom:2px solid var(--chair-hair,#4b2e22);box-shadow:2px 2px 0 #281b17}
+.studio-mode .chair-worker b{position:absolute;left:3px;bottom:0;width:22px;height:27px;background:var(--chair-shirt,#304b69);box-shadow:-3px 6px 0 -1px #20262e,3px 6px 0 -1px #20262e}
+.studio-mode .chair-worker b:after{content:"";position:absolute;right:-7px;top:8px;width:13px;height:5px;background:#e7a270;box-shadow:0 6px #e7a270}
+.studio-mode .chair-worker.worker-0{--chair-hair:#553021;--chair-shirt:#a94742}.studio-mode .chair-worker.worker-1{--chair-hair:#a54d22;--chair-shirt:#3d774e}.studio-mode .chair-worker.worker-2{--chair-hair:#30281f;--chair-shirt:#356b9a}.studio-mode .chair-worker.worker-3{--chair-hair:#382740;--chair-shirt:#6b416e}.studio-mode .chair-worker.worker-4{--chair-hair:#b78436;--chair-shirt:#c8682e}.studio-mode .chair-worker.facing-left{scale:-1 1}
+.studio-mode .reference-studio .desk-a{left:7%;top:33%}.studio-mode .reference-studio .desk-b{left:48%;top:46%}.studio-mode .reference-studio .desk-c{right:2%;top:33%}.studio-mode .reference-studio .desk-d{left:7%;bottom:21%}.studio-mode .reference-studio .desk-e{right:2%;bottom:21%}
+.studio-mode .assignment-edit{border:0;background:transparent;color:inherit;text-align:left;padding:0;display:grid;gap:4px;font:inherit}.studio-mode .assignment-edit b{font:800 12px "Courier New",monospace}.studio-mode .assignment-edit span{font:400 9px "Courier New",monospace;color:#9fa9a3}.studio-mode .assignment-arrow{border:0;background:transparent;color:#c9dd9b;padding:4px}.studio-mode .task-input{width:100%;min-width:190px;background:#131a1c;border:2px solid #b7d275;color:#f1efdd;padding:7px;font:700 11px "Courier New",monospace;outline:0}
+@media(max-width:860px){.studio-mode .seated-sprite{scale:.72;transform-origin:bottom center}.studio-mode .chair-worker{scale:.76}.studio-mode .chair-worker.facing-left{scale:-.76 .76}.studio-mode .reference-studio .desk-a{left:4%;top:30%}.studio-mode .reference-studio .desk-b{left:47%;top:44%}.studio-mode .reference-studio .desk-c{right:1%;top:31%}.studio-mode .reference-studio .desk-d{left:4%;bottom:20%}.studio-mode .reference-studio .desk-e{right:1%;bottom:20%}}
