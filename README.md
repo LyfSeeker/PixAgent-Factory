@@ -4,7 +4,7 @@
 
 PixAgent Factory is a visual command center for coordinating AI coding agents. It turns a collection of agent tasks into a pixel-art software studio where each coworker has a role, scoped capabilities, current assignment, progress, queue, and decision status.
 
-The project combines an interactive pixel office with practical project controls so teams can understand what each agent is doing without losing track of blockers, evidence, or human approvals.
+The project combines an interactive pixel office with practical project controls so teams can understand what each agent is doing without losing track of blockers, evidence, approvals, or the next handoff. The goal is to make running coding agents feel like managing a small studio rather than juggling disconnected tabs.
 
 ## Problem Statement
 
@@ -14,17 +14,30 @@ Running several coding agents at once can become difficult to manage. Generic ag
 
 PixAgent Factory gives every coworker a distinct role, skills, tools, and task. The workspace makes the studio state visible through an interactive office, coworker roster, task scheduling, and agent detail panels. Users can edit a coworker's name and assignment, hire new coworkers, schedule work, inspect task status, and trigger a scoped agent run through a server-side API route.
 
+## Studio Model
+
+The factory is designed around bounded ownership. Each task has one accountable coworker, a limited set of tools, required evidence, and a clear next decision. This keeps parallel work visible and prevents generic agents from inventing dependencies between one another.
+
+- Give each coworker a role-specific skill set and a scoped assignment.
+- Run work in parallel while capacity and queue pressure remain visible.
+- Place work in local or remote execution environments.
+- Review blockers, evidence, and approval gates before work moves forward.
+- Keep the game-like studio interface separate from the underlying execution runner.
+
 ## Features
 
 - Pixel-art studio with distinct seated coworkers, clickable workstations, live local time, and subtle office movement
 - Agent profiles with role, skills, tools, environment, capacity, task assignment, progress, and status
+- Coworker task dossiers with work plans, blockers, evidence, next decisions, and scheduled follow-ups
 - Editable coworker names and task assignments directly from the workspace
 - Hiring flow for adding a coworker with a role and scoped capabilities
+- Task board with current work, timed scheduling, manual completion, and task ownership
 - Task scheduling that updates the office status when a scheduled task becomes due
 - Project, task, activity, analytics, and agent management views
 - Task contracts that show ownership, blocker, required evidence, and next decision
 - Server-side factory API for tasks, agent ownership, decisions, blockers, and run history
 - Optional server-side OpenAI task runner that keeps the API key out of the browser
+- Cat interaction that supports petting, feeding, and a purring state
 - Responsive pixel-themed landing page and workspace
 
 ## Tech Stack
@@ -94,6 +107,8 @@ Then use the demo action in the workspace to invoke the scoped task runner.
 
 ## Additional Notes
 
-This is a hackathon MVP. Agent and scheduling state are currently stored in memory, so they reset when the server restarts. The next production steps are persistent storage, authentication, real-time collaboration, deployment, and a more complete coding-agent execution runner.
+This is a hackathon MVP. Agent and scheduling state are currently stored in memory, so they reset when the server restarts. The next production steps are persistent storage, authentication, real-time collaboration, and a more complete coding-agent execution runner.
+
+The current integration is an optional OpenAI server-side task runner. Connecting existing Codex or Claude accounts, attaching real terminal sessions, and persisting session history are planned product integrations, not claims of the current MVP.
 
 The pixel office artwork and worker sprites are original assets created for this project. The product takes inspiration from the general idea of a game-like agent workspace, without reusing external product branding, characters, or source artwork.

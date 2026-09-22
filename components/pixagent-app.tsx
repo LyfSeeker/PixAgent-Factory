@@ -116,7 +116,7 @@ function ReferenceStudio({ agents, scheduledTasks, now, nextSchedule, onSelect, 
         <div className="office-rug rug-blue"/><div className="office-rug rug-green"/><div className="office-rug rug-rose"/><div className="sleepy-cat">⌁</div><div className="coffee-station">☕<i/><i/></div>
         {agents.map((agent, index) => <a className={`retro-desk ${agent.spot} ${index === roamerIndex ? "worker-away" : ""}`} key={agent.id} href={`/workspace?agent=${agent.id}`} onClick={() => onSelect(agent.id)} onPointerDown={() => onSelect(agent.id)} aria-label={`Open ${agent.name}'s profile`}><div className="retro-monitor"><i/><span/></div><div className="retro-lamp"/><div className="retro-mug">☕</div><div className="retro-keyboard"/><span className={`seated-sprite worker-${index % 5}`} aria-hidden="true"/></a>)}
         {roamer && <div className={`office-roamer route-${roamerIndex} worker-${roamerIndex}`} key={`walk-${roamStep}`} aria-label={`${roamer.name} is walking through the office and returning to their desk`} style={{ "--roamer-hair": roamer.color } as React.CSSProperties}><i/><b/></div>}
-        <button className="cat-action" onClick={() => setCatMood(catMood === "Purring!" ? "Feed cat" : "Purring!")}><span>🐾</span>{catMood}</button>
+        <button className="cat-action" onClick={() => setCatMood(catMood === "Pet cat" ? "Feed cat" : catMood === "Feed cat" ? "Purring!" : "Pet cat")}><span>🐾</span>{catMood}</button>
       </div>
       <footer className="pixel-footer"><span>▣ inbox <b>1</b></span><strong>Company Studio</strong><span>● all systems synced</span></footer>
     </section>
